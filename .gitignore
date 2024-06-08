@@ -1,0 +1,4 @@
+__pycache__/
+Loco/__pycache__/
+Loco/management/commands/__pycache__/
+*.cfg
