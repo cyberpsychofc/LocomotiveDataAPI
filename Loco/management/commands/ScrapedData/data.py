@@ -75,7 +75,7 @@ def getBroadElectric():
             else:
                 img_src = "No Image Available"
 
-            data = [motive_power, gauge,name,usage,series,numbers,traction,
+            data = [motive_power, gauge,name,traction,usage,series,numbers,
                     img_src, manufacturer,axles, numbers_built, production, power,status]
             Loco = Locomotive()
             saveLocomotive(Loco,data)
@@ -106,7 +106,7 @@ def getMeterElectric():
             else:
                 img_src = "No Image Available"
 
-            data = [motive_power, gauge,name,usage,series,numbers,traction,
+            data = [motive_power, gauge,name,traction,usage,series,numbers,
                     img_src, manufacturer,axles, numbers_built, production, power,status]
             Loco = Locomotive()
             saveLocomotive(Loco,data)
@@ -142,7 +142,7 @@ def getBroadDiesel():
             else:
                 img_src = "No Image Available"
 
-            data = [motive_power, gauge,name,usage,series,numbers,traction,
+            data = [motive_power, gauge,name,traction,usage,series,numbers,
                     img_src, manufacturer,axles, numbers_built, production, power,status]
             Loco = Locomotive()
             saveLocomotive(Loco,data)
@@ -177,7 +177,7 @@ def getNon_BroadDiesel(table,gauge_param):
             else:
                 img_src = "No Image Available"
 
-            data = [motive_power, gauge,name,usage,series,numbers,traction,
+            data = [motive_power, gauge,name,traction,usage,series,numbers,
                     img_src, manufacturer,axles, numbers_built, production, power,status]
             Loco = Locomotive()
             saveLocomotive(Loco,data)
@@ -218,7 +218,7 @@ def getDualBroad():
             else:
                 img_src = "No Image Available"
                 
-            data = [motive_power, gauge,name,usage,series,numbers,traction,
+            data = [motive_power, gauge,name,traction,usage,series,numbers,
                     img_src, manufacturer,axles, numbers_built, production, power,status]
             Loco = Locomotive()
             saveLocomotive(Loco,data)

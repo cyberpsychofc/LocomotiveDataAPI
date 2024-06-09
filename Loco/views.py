@@ -26,10 +26,12 @@ def locomotive_details(request,name, format=None):
     
     if request.method == 'GET':
         serializer = LocomotivesSerializer(locomotive)
-        if locomotive.motive_power=="Electric" and locomotive.gauge == "Broad":
-            serializer.broad_electric()
-        elif(False):
-            pass
+        if locomotive.motive_power=="Electric":
+            serializer.electric_filter()
+        elif(locomotive.motive_power == "Diesel" and locomotive.gauge == "Broad"):
+            serializer.broadDiesel_filter()
+        elif(locomotive.motive_power == "Electric/Diesel" or (locomotive.motive_power == "Diesel" and locomotive.gauge != "Broad")):
+            serializer.standard_filter()
         return Response(serializer.data)
     
     elif request.method == 'PUT':
