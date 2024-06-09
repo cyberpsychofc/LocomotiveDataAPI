@@ -20,3 +20,8 @@ https://localhost:8000/locomotives
 
 ![demo](./demo.png)
 
+Lets search for a particular locomotive e.g. WAP-1
+
+https://localhost:8000/locomotives/wap-1
+
+![demo2](./demo2.png)
