@@ -24,6 +24,9 @@ tables = soup.findAll("table")
 
 7-Broad-gauge Dual Locomotives
 '''
+
+root = "https://en.m.wikipedia.org/"
+
 def saveLocomotive(Loco, data):
     Loco.motive_power = data[0]
     Loco.gauge = data[1]
@@ -59,13 +62,18 @@ def getBroadElectric():
             name = columns[2 - norm].text.replace('\n','')
             series = name[:4] if name[:3]=="WCA" else name[:3]
             numbers = "NA"
-            img_src = "No Image Present"
             manufacturer = columns[4  - norm].text.replace('\n','')
             axles = columns[5  - norm].text.replace('\n','')
             numbers_built = columns[6  - norm].text.replace('\n','')
             production = columns[7  - norm].text.replace('\n','')
             power = columns[8  - norm].text.replace('\n','')
             status = columns[9  - norm].text.replace('\n','')
+
+            link = row.find('a', {'class': 'mw-file-description'})
+            if link:
+                img_src = root + link['href']
+            else:
+                img_src = "No Image Available"
 
             data = [motive_power, gauge,name,usage,series,numbers,traction,
                     img_src, manufacturer,axles, numbers_built, production, power,status]
@@ -84,7 +92,6 @@ def getMeterElectric():
             gauge = 'Meter'
             name = columns[2].text.replace('\n','')
             series = name[:3]
-            img_src = "No Image Present"
             numbers = "NA"
             manufacturer = columns[4].text.replace('\n','')
             axles = columns[5].text.replace('\n','')
@@ -92,6 +99,12 @@ def getMeterElectric():
             production = columns[7].text.replace('\n','')
             power = columns[8].text.replace('\n','')
             status = columns[9].text.replace('\n','')
+
+            link = row.find('a', {'class': 'mw-file-description'})
+            if link:
+                img_src = root + link['href']
+            else:
+                img_src = "No Image Available"
 
             data = [motive_power, gauge,name,usage,series,numbers,traction,
                     img_src, manufacturer,axles, numbers_built, production, power,status]
@@ -116,13 +129,18 @@ def getBroadDiesel():
             traction = "NA"
             series = name[:3]
             numbers = columns[2  - norm].text.replace('\n','')
-            img_src = "No Image Present"
             manufacturer = columns[4  - norm].text.replace('\n','')
             axles = columns[5  - norm].text.replace('\n','')
             numbers_built = columns[6  - norm].text.replace('\n','')
             production = columns[7  - norm].text.replace('\n','')
             power = columns[8  - norm].text.replace('\n','')
             status = columns[9  - norm].text.replace('\n','')
+
+            link = row.find('a', {'class': 'mw-file-description'})
+            if link:
+                img_src = root + link['href']
+            else:
+                img_src = "No Image Available"
 
             data = [motive_power, gauge,name,usage,series,numbers,traction,
                     img_src, manufacturer,axles, numbers_built, production, power,status]
@@ -144,7 +162,6 @@ def getNon_BroadDiesel(table,gauge_param):
             gauge = gauge_param
             name = columns[1 - norm].text.replace('\n','')
             series = name[:3]
-            img_src = "No Image Present"
             manufacturer = columns[3  - norm].text.replace('\n','')
             axles = columns[4  - norm].text.replace('\n','')
             numbers_built = columns[5  - norm].text.replace('\n','')
@@ -153,6 +170,13 @@ def getNon_BroadDiesel(table,gauge_param):
             status = columns[8  - norm].text.replace('\n','')
             traction = "NA"
             numbers = "NA"
+
+            link = row.find('a', {'class': 'mw-file-description'})
+            if link:
+                img_src = root + link['href']
+            else:
+                img_src = "No Image Available"
+
             data = [motive_power, gauge,name,usage,series,numbers,traction,
                     img_src, manufacturer,axles, numbers_built, production, power,status]
             Loco = Locomotive()
@@ -180,7 +204,6 @@ def getDualBroad():
             gauge = "Broad"
             name = columns[1 - norm].text.replace('\n','')
             series = name[:4]
-            img_src = "No Image Present"
             manufacturer = columns[3  - norm].text.replace('\n','')
             axles = columns[4  - norm].text.replace('\n','')
             numbers_built = columns[5  - norm].text.replace('\n','')
@@ -189,6 +212,12 @@ def getDualBroad():
             status = columns[8  - norm].text.replace('\n','')
             traction = "AC"
             numbers = "NA"
+            link = row.find('a', {'class': 'mw-file-description'})
+            if link:
+                img_src = root + link['href']
+            else:
+                img_src = "No Image Available"
+                
             data = [motive_power, gauge,name,usage,series,numbers,traction,
                     img_src, manufacturer,axles, numbers_built, production, power,status]
             Loco = Locomotive()
