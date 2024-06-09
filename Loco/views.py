@@ -44,3 +44,70 @@ def locomotive_details(request,name, format=None):
     elif request.method == 'DELETE':
         locomotive.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET','POST'])
+def electric_list(request, format=None):
+    if request.method == 'GET':
+        locos = Locomotive.objects.all().filter(motive_power = "Electric")
+        serializer = LocomotivesSerializer(locos, many=True)
+        return Response(serializer.data)
+    if request.method == 'POST':
+        serializer = LocomotivesSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status = status.HTTP_201_CREATED)
+@api_view(['GET','POST'])
+def diesel_list(request, format=None):
+    if request.method == 'GET':
+        locos = Locomotive.objects.all().filter(motive_power = "Diesel")
+        serializer = LocomotivesSerializer(locos, many=True)
+        return Response(serializer.data)
+    if request.method == 'POST':
+        serializer = LocomotivesSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status = status.HTTP_201_CREATED)
+@api_view(['GET','POST'])
+def broad_list(request, format=None):
+    if request.method == 'GET':
+        locos = Locomotive.objects.all().filter(gauge = "Broad")
+        serializer = LocomotivesSerializer(locos, many=True)
+        return Response(serializer.data)
+    if request.method == 'POST':
+        serializer = LocomotivesSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status = status.HTTP_201_CREATED)
+@api_view(['GET','POST'])
+def meter_list(request, format=None):
+    if request.method == 'GET':
+        locos = Locomotive.objects.all().filter(gauge = "Meter")
+        serializer = LocomotivesSerializer(locos, many=True)
+        return Response(serializer.data)
+    if request.method == 'POST':
+        serializer = LocomotivesSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status = status.HTTP_201_CREATED)
+@api_view(['GET','POST'])
+def narrow_list(request, format=None):
+    if request.method == 'GET':
+        locos = Locomotive.objects.all().filter(gauge = "Narrow")
+        serializer = LocomotivesSerializer(locos, many=True)
+        return Response(serializer.data)
+    if request.method == 'POST':
+        serializer = LocomotivesSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status = status.HTTP_201_CREATED)
+@api_view(['GET','POST'])
+def narrower_list(request, format=None):
+    if request.method == 'GET':
+        locos = Locomotive.objects.all().filter(gauge = "Narrower")
+        serializer = LocomotivesSerializer(locos, many=True)
+        return Response(serializer.data)
+    if request.method == 'POST':
+        serializer = LocomotivesSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status = status.HTTP_201_CREATED)
