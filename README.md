@@ -14,5 +14,9 @@ Update the database before making an API call.
     
 ## Demo
 
-This README is yet to be updated.
+Endpoint demonstration of the API
+
+https://localhost:8000/locomotives
+
+![demo](./demo.png)
 
