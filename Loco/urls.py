@@ -15,20 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from Loco import views
 from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('locomotives/',views.locomotive_list),
-    path('locomotives/<str:name>',views.locomotive_details),
-    path('locomotives/broad/',views.broad_list),
-    path('locomotives/meter/',views.meter_list),
-    path('locomotives/narrow/',views.narrow_list),
-    path('locomotives/narrower/',views.narrower_list),
-    path('locomotives/electric/',views.electric_list),
-    path('locomotives/diesel/',views.diesel_list)
+    path('api/',include('users.urls'))
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

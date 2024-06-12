@@ -1,10 +1,12 @@
 from .models import Locomotive  
 from .serializers import LocomotivesSerializer
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 
 @api_view(['GET','POST'])
+@permission_classes([IsAuthenticated])
 def locomotive_list(request, format=None):
 
     if request.method == 'GET':
@@ -18,6 +20,7 @@ def locomotive_list(request, format=None):
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         
 @api_view(['GET','PUT','DELETE'])
+@permission_classes([IsAuthenticated])
 def locomotive_details(request,name, format=None):
     try:
         locomotive = Locomotive.objects.get(pk=name.upper())
@@ -46,6 +49,7 @@ def locomotive_details(request,name, format=None):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['GET','POST'])
+@permission_classes([IsAuthenticated])
 def electric_list(request, format=None):
     if request.method == 'GET':
         locos = Locomotive.objects.all().filter(motive_power = "Electric")
@@ -56,7 +60,9 @@ def electric_list(request, format=None):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
+
 @api_view(['GET','POST'])
+@permission_classes([IsAuthenticated])
 def diesel_list(request, format=None):
     if request.method == 'GET':
         locos = Locomotive.objects.all().filter(motive_power = "Diesel")
@@ -67,7 +73,9 @@ def diesel_list(request, format=None):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
+
 @api_view(['GET','POST'])
+@permission_classes([IsAuthenticated])
 def broad_list(request, format=None):
     if request.method == 'GET':
         locos = Locomotive.objects.all().filter(gauge = "Broad")
@@ -78,7 +86,9 @@ def broad_list(request, format=None):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
+
 @api_view(['GET','POST'])
+@permission_classes([IsAuthenticated])
 def meter_list(request, format=None):
     if request.method == 'GET':
         locos = Locomotive.objects.all().filter(gauge = "Meter")
@@ -89,7 +99,9 @@ def meter_list(request, format=None):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
+
 @api_view(['GET','POST'])
+@permission_classes([IsAuthenticated])
 def narrow_list(request, format=None):
     if request.method == 'GET':
         locos = Locomotive.objects.all().filter(gauge = "Narrow")
@@ -100,7 +112,9 @@ def narrow_list(request, format=None):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
+
 @api_view(['GET','POST'])
+@permission_classes([IsAuthenticated])
 def narrower_list(request, format=None):
     if request.method == 'GET':
         locos = Locomotive.objects.all().filter(gauge = "Narrower")

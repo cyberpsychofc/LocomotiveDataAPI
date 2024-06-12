@@ -20,6 +20,8 @@ Install dependencies
   pip install requests
   pip install Django
   pip install djangorestframework
+  pip install pyjwt
+  pip install django-cors-headers
 ```
 
 Start the server
@@ -27,7 +29,6 @@ Start the server
 ```bash
   python manage.py runserver
 ```
-
 ## Updating the Database
 
 Update the database before making an API call.
@@ -35,10 +36,52 @@ Update the database before making an API call.
 ```bash
   python manage.py updatemodels
 ```
+
+## Register a User
+Create a superuser via CI. 
+```bash
+  python manage.py createsuperuser
+```
+Register your standard users using Postman
+
+```http
+  POST /api/register
+```
+Pass the following parameters
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `name` | `string` | `${name}` |
+| `email` | `string` | `${email}` |
+| `password` | `string` | `${passwrd}` |
+
+## Via Postman
+### Logging in
+
+```http
+  POST /api/login
+```
+Pass the following parameters
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `email` | `string` | `${email}` |
+| `password` | `string` | `${passwrd}` |
+### Status
+To check if you're logged in
+```http
+  GET /api/user
+```
+If you're logged in you will see your user details in the response
+
+### Logout
+```http
+  POST /api/logout
+```
     
 ## Demo
 
-Endpoint demonstration of the API
+Endpoint demonstration of the API. For more information refer to the documentaiton.
 
 https://localhost:8000/locomotives
 
@@ -56,7 +99,7 @@ https://localhost:8000/locomotives/wap-1
 #### Get list of all locomotives
 
 ```http
-  GET /locomotives/
+  GET /api/locomotives/
 ```
 
 | Parameter | Type     | Description                |
@@ -66,7 +109,7 @@ https://localhost:8000/locomotives/wap-1
 #### Get a particular locomotive
 
 ```http
-  GET /locomotives/${name}
+  GET /api/locomotives/${name}
 ```
 
 | Parameter | Type     | Description                       |
@@ -76,7 +119,7 @@ https://localhost:8000/locomotives/wap-1
 #### Get a list of Electric locomotives
 
 ```http
-  GET /locomotives/electric
+  GET /api/locomotives/electric
 ```
 
 | Parameter | Type     | Description                       |
@@ -85,7 +128,7 @@ https://localhost:8000/locomotives/wap-1
 
 #### Get a list of Diesel locomotives
 ```http
-  GET /locomotives/diesel
+  GET /api/locomotives/diesel
 ```
 | Parameter | Type     | Description                       |
 | :-------- | :------- | :-------------------------------- |
@@ -94,7 +137,7 @@ https://localhost:8000/locomotives/wap-1
 #### Get a list of Broad-Gauge locomotives
 
 ```http
-  GET /locomotives/broad
+  GET /api/locomotives/broad
 ```
 
 | Parameter | Type     | Description                       |
@@ -103,7 +146,7 @@ https://localhost:8000/locomotives/wap-1
 #### Get a list of Meter-Gauge locomotives
 
 ```http
-  GET /locomotives/meter
+  GET /api/locomotives/meter
 ```
 
 | Parameter | Type     | Description                       |
@@ -113,7 +156,7 @@ https://localhost:8000/locomotives/wap-1
 #### Get a list of Narrow-Gauge locomotives
 
 ```http
-  GET /locomotives/narrow
+  GET /api/locomotives/narrow
 ```
 
 | Parameter | Type     | Description                       |
@@ -123,7 +166,7 @@ https://localhost:8000/locomotives/wap-1
 #### Get a list of Narrower-Gauge locomotives
 
 ```http
-  GET /locomotives/narrower
+  GET /api/locomotives/narrower
 ```
 
 | Parameter | Type     | Description                       |
