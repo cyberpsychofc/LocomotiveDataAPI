@@ -5,10 +5,9 @@ from .models import User
 from rest_framework.exceptions import AuthenticationFailed
 import jwt, datetime
 from datetime import timezone
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from .authentication import verify_user_token
 
 class RegisterView(APIView):
-    permission_classes = [AllowAny]
     def post(self, request):
         serializer = UserSerializer(data = request.data)
         serializer.is_valid(raise_exception = True)
@@ -16,13 +15,12 @@ class RegisterView(APIView):
         return Response(serializer.data)
     
 class LoginView(APIView):
-    permission_classes = [AllowAny]
     def post(self, request):
         email = request.data['email']
         password = request.data['password']
 
         user = User.objects.filter(email = email).first()
-
+        #authenticate
         if user is None:
             raise AuthenticationFailed('User not Found!')
         if not user.check_password(password):
@@ -47,28 +45,19 @@ class LoginView(APIView):
         return response
     
 class UserView(APIView):
-    permission_classes = [IsAuthenticated]
     def get(self, request):
         token = request.COOKIES.get('jwt')
-        if not token:
-            raise AuthenticationFailed('Unauthenticated')
-        try:
-            payload = jwt.decode(token, 'secret', algorithms=['HS256'])
-        except jwt.ExpiredSignatureError:
-            raise AuthenticationFailed('Unauthenticated')
-        except jwt.ImmatureSignatureError:
-            raise AuthenticationFailed('Token is not yet valid')
-
-        user = User.objects.filter(id = payload['id']).first()
+        
+        user = User.objects.filter(id = verify_user_token(token)).first()
+        
         serializer = UserSerializer(user)
         return Response(serializer.data)
     
 class LogoutView(APIView):
-    permission_classes = [IsAuthenticated]
     def post(self, request):
         response = Response()
         response.delete_cookie('jwt')
         response.data = {
-            'message':'Logged out successfully'
+            'message':'Logout Success'
         }
         return response

@@ -36,8 +36,9 @@ Update the database before making an API call.
 ```bash
   python manage.py updatemodels
 ```
-
-## Register a User
+## How to consume the API
+### Via Postman
+### Register a User
 Create a superuser via CI. 
 ```bash
   python manage.py createsuperuser
@@ -55,8 +56,7 @@ Pass the following parameters
 | `email` | `string` | `${email}` |
 | `password` | `string` | `${passwrd}` |
 
-## Via Postman
-### Logging in
+#### Logging in
 
 ```http
   POST /api/login
@@ -67,18 +67,22 @@ Pass the following parameters
 | :-------- | :------- | :------------------------- |
 | `email` | `string` | `${email}` |
 | `password` | `string` | `${passwrd}` |
-### Status
+#### Status
 To check if you're logged in
 ```http
   GET /api/user
 ```
 If you're logged in you will see your user details in the response
 
-### Logout
+#### Logout
 ```http
   POST /api/logout
 ```
-    
+### IMPORTANT
+
+Provide the generated JWT token at the time of login in the Authorization tab in Postman
+![token](./token.png)
+
 ## Demo
 
 Endpoint demonstration of the API. For more information refer to the documentaiton.
